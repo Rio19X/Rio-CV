@@ -7,33 +7,116 @@
   <meta name="description" content="Rio - Front End Developer | HTML, CSS, JavaScript, AI Tools" />
   <style>
     :root {
-      --red: #ff1a1a;
-      --light-red: #ff4444;
-      --dark-bg: #000000;
+      --red: #cc0000;        /* أحمر غامق مشع */
+      --light-red: #ff3333;  /* للتوهج */
+      --dark-bg: #000000;    /* أسود نقي */
+      --dark-card: rgba(10, 0, 0, 0.9);
+      --page-bg: #000000;    /* خلفية الصفحة سوداء */
     }
 
-    * { margin: 0; padding: 0; box-sizing: border-box; }
+    * { 
+      margin: 0; 
+      padding: 0; 
+      box-sizing: border-box; 
+    }
 
     body {
-      background-color: var(--dark-bg);
+      background: #000000; /* أسود نقي */
       color: #fff;
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       line-height: 1.7;
-      padding: 2rem 1rem;
       min-height: 100vh;
       display: flex;
-      flex-direction: column;
       align-items: center;
+      justify-content: center;
+      padding: 2rem 1rem;
     }
 
-    .container {
+    .book-container {
       width: 100%;
-      max-width: 1000px;
+      max-width: 1400px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0;
+      background: var(--page-bg);
+      border-radius: 20px;
+      overflow: hidden;
+      position: relative;
+      min-height: 80vh;
+      
+      /* إطار أحمر مشع غامق */
+      box-shadow: 
+        0 0 60px rgba(204, 0, 0, 0.6),
+        0 0 100px rgba(204, 0, 0, 0.3),
+        inset 0 0 100px rgba(0, 0, 0, 0.8);
+      border: 2px solid var(--red);
+      outline: 1px solid rgba(204, 0, 0, 0.4);
+    }
+
+    /* تأثير توهج خارجي إضافي */
+    .book-container::before {
+      content: '';
+      position: absolute;
+      top: -4px;
+      left: -4px;
+      right: -4px;
+      bottom: -4px;
+      border: 1px solid rgba(204, 0, 0, 0.5);
+      border-radius: 24px;
+      box-shadow: 0 0 30px rgba(204, 0, 0, 0.7);
+      z-index: -1;
+      pointer-events: none;
+    }
+
+    /* باقي الستايلات بدون تغيير (محافظة على التفاعل) */
+    .left-page {
+      background: var(--dark-card);
+      padding: 3rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      position: relative;
+      border-right: 2px solid rgba(204, 0, 0, 0.3);
+    }
+
+    .left-page::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      width: 1px;
+      background: linear-gradient(to bottom, 
+        transparent, 
+        var(--red), 
+        transparent);
+      opacity: 0.4;
+    }
+
+    .profile-header {
       text-align: center;
+      margin-bottom: 3rem;
+    }
+
+    .profile-image {
+      width: 140px;
+      height: 140px;
+      border-radius: 50%;
+      border: 4px solid var(--red);
+      box-shadow: 
+        0 0 30px rgba(204, 0, 0, 0.7),
+        inset 0 0 20px rgba(0, 0, 0, 0.5);
+      object-fit: cover;
+      margin-bottom: 1.5rem;
+      transition: transform 0.3s ease;
+    }
+
+    .profile-image:hover {
+      transform: scale(1.05);
     }
 
     .rio-title {
-      font-size: clamp(3rem, 10vw, 6rem);
+      font-size: 3.5rem;
       font-weight: 900;
       color: var(--red);
       text-shadow: 0 0 20px var(--light-red);
@@ -43,124 +126,293 @@
     }
 
     .rio-subtitle {
-      font-size: 1.8rem;
+      font-size: 1.6rem;
       color: #ff6666;
-      margin-bottom: 2rem;
       font-weight: 600;
+      margin-bottom: 2rem;
     }
 
-    .video-container {
-      width: 100%;
-      max-width: 900px;
-      margin: 2rem auto;
-      border: 3px solid var(--red);
-      border-radius: 16px;
-      overflow: hidden;
-      box-shadow: 0 0 40px rgba(255, 26, 26, 0.5);
+    .content-section {
+      margin-bottom: 2.5rem;
     }
 
-    .youtube-player {
-      width: 100%;
-      height: 500px;
-      border: none;
-    }
-
-    .skills-section {
-      width: 100%;
-      max-width: 900px;
-      margin: 3rem auto 2rem;
-      padding: 2rem;
-      background: rgba(20, 0, 0, 0.7);
-      border: 2px solid var(--red);
-      border-radius: 14px;
-      text-align: center;
-    }
-
-    .skills-title {
+    .section-title {
       color: var(--red);
       font-size: 1.8rem;
       margin-bottom: 1.5rem;
       text-shadow: 0 0 10px var(--light-red);
+      border-bottom: 2px solid var(--red);
+      padding-bottom: 0.5rem;
+      position: relative;
     }
 
-    .skills-list {
-      display: flex;
-      flex-direction: column;
+    .section-title::after {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      right: 0;
+      width: 50px;
+      height: 2px;
+      background: var(--light-red);
+      box-shadow: 0 0 10px var(--light-red);
+    }
+
+    .skills-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
       gap: 1rem;
       margin-bottom: 2rem;
     }
 
     .skill-item {
+      background: rgba(204, 0, 0, 0.15);
+      padding: 1rem;
+      border: 1px solid rgba(204, 0, 0, 0.4);
+      border-radius: 10px;
+      color: #ff9999;
+      font-weight: 600;
+      text-align: center;
+      transition: all 0.3s ease;
+    }
+
+    .skill-item:hover {
+      background: rgba(204, 0, 0, 0.25);
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(204, 0, 0, 0.4);
+    }
+
+    .about-text {
+      color: #ffaaaa;
+      font-size: 1.1rem;
+      line-height: 1.8;
+      text-align: justify;
+    }
+
+    .contact-info {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .email-link {
       color: #ff8888;
-      font-size: 1.3rem;
+      font-size: 1.2rem;
+      text-decoration: none;
+      padding: 1rem 1.5rem;
+      background: rgba(204, 0, 0, 0.2);
+      border: 2px solid var(--red);
+      border-radius: 12px;
+      transition: all 0.3s ease;
+      text-align: center;
       font-weight: 600;
     }
 
-    .ai-section {
-      margin-top: 2rem;
-      padding: 1.5rem;
-      background: rgba(255, 26, 26, 0.1);
-      border-radius: 10px;
-      border: 1px solid var(--red);
+    .email-link:hover {
+      background: rgba(204, 0, 0, 0.35);
+      color: #fff;
+      box-shadow: 0 0 25px rgba(204, 0, 0, 0.6);
+      transform: translateY(-2px);
     }
 
-    .ai-text {
-      color: #ffaaaa;
-      font-size: 1.1rem;
-      line-height: 1.6;
+    .right-page {
+      background: var(--dark-card);
+      padding: 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+
+    .right-page::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      width: 1px;
+      background: linear-gradient(to bottom, 
+        transparent, 
+        var(--red), 
+        transparent);
+      opacity: 0.4;
+    }
+
+    .video-container {
+      width: 100%;
+      max-width: 600px;
+      border: 3px solid var(--red);
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 
+        0 0 40px rgba(204, 0, 0, 0.6),
+        inset 0 0 30px rgba(0, 0, 0, 0.5);
+      position: relative;
+    }
+
+    .video-container::before {
+      content: '';
+      position: absolute;
+      top: -10px;
+      left: -10px;
+      right: -10px;
+      bottom: -10px;
+      border: 1px solid rgba(204, 0, 0, 0.4);
+      border-radius: 20px;
+      z-index: -1;
+    }
+
+    .youtube-player {
+      width: 100%;
+      height: 400px;
+      border: none;
+      display: block;
     }
 
     footer {
-      margin-top: 3rem;
+      position: absolute;
+      bottom: 2rem;
+      left: 50%;
+      transform: translateX(-50%);
+      text-align: center;
       color: #ff6666;
       font-size: 0.9rem;
+      width: 100%;
+    }
+
+    @media (max-width: 1024px) {
+      .book-container {
+        grid-template-columns: 1fr;
+        max-width: 800px;
+      }
+      
+      .left-page {
+        border-right: none;
+        border-bottom: 2px solid rgba(204, 0, 0, 0.3);
+      }
+      
+      .right-page::before {
+        display: none;
+      }
     }
 
     @media (max-width: 768px) {
-      .youtube-player { height: 300px; }
-      .skills-section { padding: 1.5rem; }
-      .skill-item { font-size: 1.1rem; }
+      body {
+        padding: 1rem;
+      }
+      
+      .left-page, .right-page {
+        padding: 2rem;
+      }
+      
+      .rio-title {
+        font-size: 2.8rem;
+      }
+      
+      .rio-subtitle {
+        font-size: 1.4rem;
+      }
+      
+      .profile-image {
+        width: 120px;
+        height: 120px;
+      }
+      
+      .skills-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .youtube-player {
+        height: 300px;
+      }
     }
 
     @media (max-width: 480px) {
-      .youtube-player { height: 200px; }
-      .rio-title { font-size: 3rem; }
-      .skills-title { font-size: 1.5rem; }
-      .skill-item { font-size: 1rem; }
-      .ai-text { font-size: 1rem; }
+      .left-page, .right-page {
+        padding: 1.5rem;
+      }
+      
+      .rio-title {
+        font-size: 2.2rem;
+      }
+      
+      .rio-subtitle {
+        font-size: 1.2rem;
+      }
+      
+      .profile-image {
+        width: 100px;
+        height: 100px;
+      }
+      
+      .section-title {
+        font-size: 1.5rem;
+      }
+      
+      .youtube-player {
+        height: 250px;
+      }
+      
+      .email-link {
+        font-size: 1rem;
+        padding: 0.8rem 1rem;
+      }
     }
   </style>
 </head>
 <body>
 
-  <div class="container">
-    <h1 class="rio-title">Rio</h1>
-    <h2 class="rio-subtitle">Front End Developer</h2>
-
-    <div class="video-container">
-      <iframe class="youtube-player"
-        src="https://www.youtube.com/embed/OFwuL-3Z3VA?autoplay=1&loop=1&playlist=OFwuL-3Z3VA&mute=0&controls=1&modestbranding=1"
-        frameborder="0"
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-        allowfullscreen>
-      </iframe>
-    </div>
-
-    <div class="skills-section">
-      <h3 class="skills-title">Developer Skills</h3>
-      
-      <div class="skills-list">
-        <div class="skill-item">HTML</div>
-        <div class="skill-item">CSS</div>
-        <div class="skill-item">JavaScript</div>
+  <div class="book-container">
+    <!-- الصفحة اليسرى -->
+    <div class="left-page">
+      <div class="profile-header">
+        <img src="photo.jpg" alt="Rio Profile Photo" class="profile-image" 
+             onerror="this.style.display='none'">
+        <h1 class="rio-title">Rio</h1>
+        <h2 class="rio-subtitle">Front End Developer</h2>
       </div>
 
-      
-   
-    <footer>
-      Rio © 2025 - Front End Developer<br>
-      
-    </footer>
+      <div class="content-section">
+        <h3 class="section-title">المهارات</h3>
+        <div class="skills-grid">
+          <div class="skill-item">HTML</div>
+          <div class="skill-item">CSS</div>
+          <div class="skill-item">JavaScript</div>
+          <div class="skill-item">AI Tools</div>
+        </div>
+      </div>
+
+      <div class="content-section">
+        <h3 class="section-title">عنّي</h3>
+        <p class="about-text">
+          مطوّر واجهات أمامية مبدع من مصر، متخصص في تحويل الأفكار إلى تجارب ويب استثنائية. 
+          أجمع بين الإبداع البصري والكفاءة التقنية لبناء حلول رقمية تلهم المستخدمين وتدفع الأعمال نحو النجاح.
+        </p>
+      </div>
+
+      <div class="content-section">
+        <h3 class="section-title">التواصل</h3>
+        <div class="contact-info">
+          <a href="mailto:rio19x.frontend@gmail.com" class="email-link">
+            rio19x.frontend@gmail.com
+          </a>
+          <p class="about-text" style="color: #ff8888; font-size: 1rem; text-align: center;">
+            متاح للعمل على المشاريع المبتكرة والتعاون
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- الصفحة اليمنى -->
+    <div class="right-page">  
+      <div class="video-container">
+        <iframe class="youtube-player"
+          src="https://www.youtube.com/embed/OFwuL-3Z3VA?autoplay=1&loop=1&playlist=OFwuL-3Z3VA&mute=0&controls=1&modestbranding=1"
+          frameborder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen>
+        </iframe>
+      </div>
+    </div>
   </div>
 
 </body>
