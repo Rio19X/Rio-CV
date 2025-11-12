@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" dir="rtl">
+<html lang="en" dir="ltr">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -7,40 +7,31 @@
   <meta name="description" content="Rio - Front End Developer | HTML, CSS, JavaScript, AI Tools" />
   <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&family=Poppins:wght@400;600;700;900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
-
   <style>
     :root {
-      --red: #cc0000;        
-      --light-red: #ff3333;  
-      --dark-bg: #000000;    
+      --red: #cc0000;
+      --light-red: #ff3333;
+      --dark-bg: #000000;
       --dark-card: rgba(10, 0, 0, 0.9);
-      --page-bg: #000000;    
-      --blue: #001a4d;       
+      --page-bg: #000000;
+      --blue: #001a4d;
     }
-
-    * { 
-      margin: 0; 
-      padding: 0; 
-      box-sizing: border-box; 
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
     }
-
     body {
       background: #000000;
       color: #e8e8e8;
-      font-family: 'Cairo', 'Poppins', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      font-family: 'Poppins', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       line-height: 1.7;
       min-height: 100vh;
       display: flex;
       align-items: center;
       justify-content: center;
       padding: 2rem 1rem;
-      transition: font-family 0.3s ease;
     }
-    
-    body[dir="ltr"] {
-      font-family: 'Poppins', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    }
-
     .book-container {
       width: 100%;
       max-width: 1400px;
@@ -56,22 +47,20 @@
       outline: 1px solid rgba(0, 102, 255, 0.4);
       animation: breatheBlue 2s ease-in-out infinite;
     }
-
     @keyframes breatheBlue {
       0%, 100% {
-        box-shadow: 
+        box-shadow:
           0 0 20px rgba(0, 102, 255, 0.3),
           0 0 40px rgba(0, 102, 255, 0.2),
           inset 0 0 60px rgba(0, 26, 77, 0.8);
       }
       50% {
-        box-shadow: 
+        box-shadow:
           0 0 50px rgba(0, 102, 255, 0.6),
           0 0 80px rgba(0, 102, 255, 0.4),
           inset 0 0 60px rgba(0, 26, 77, 0.8);
       }
     }
-
     .book-container::before {
       content: '';
       position: absolute;
@@ -85,7 +74,6 @@
       pointer-events: none;
       animation: breatheGlow 2s ease-in-out infinite;
     }
-
     @keyframes breatheGlow {
       0%, 100% {
         box-shadow: 0 0 15px rgba(0, 102, 255, 0.3);
@@ -95,32 +83,31 @@
       }
     }
 
+    /* الصفحة اليسرى: الفيديو (شمال) */
     .left-page {
+      background: #000000;
+      padding: 2.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+
+    /* الصفحة اليمنى: المحتوى (يمين) */
+    .right-page {
       background: #000000;
       padding: 3rem;
       display: flex;
       flex-direction: column;
       justify-content: center;
       position: relative;
-      border-right: 2px solid rgba(0, 102, 255, 0.3);
-    }
-
-    .left-page::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      right: 0;
-      bottom: 0;
-      width: 1px;
-      background: linear-gradient(to bottom, transparent, #0066ff, transparent);
-      opacity: 0.4;
+      /* تم حذف الحدود والخط الفاصل */
     }
 
     .profile-header {
       text-align: center;
       margin-bottom: 3rem;
     }
-
     .profile-image {
       width: 140px;
       height: 140px;
@@ -132,7 +119,6 @@
       transition: transform 0.3s ease;
       animation: breatheImage 2s ease-in-out infinite;
     }
-
     @keyframes breatheImage {
       0%, 100% {
         box-shadow: 0 0 20px rgba(0, 102, 255, 0.5), inset 0 0 20px rgba(0, 0, 0, 0.5);
@@ -141,11 +127,9 @@
         box-shadow: 0 0 40px rgba(0, 102, 255, 0.9), inset 0 0 20px rgba(0, 0, 0, 0.5);
       }
     }
-
     .profile-image:hover {
       transform: scale(1.05);
     }
-
     .rio-title {
       font-size: 3.5rem;
       font-weight: 900;
@@ -155,49 +139,15 @@
       font-family: 'Arial Black', sans-serif;
       margin-bottom: 0.5rem;
     }
-
     .rio-subtitle {
       font-size: 1.6rem;
       color: #e0e0e0;
       font-weight: 600;
       margin-bottom: 2rem;
     }
-
-    .lang-toggle {
-      position: absolute;
-      bottom: 2rem;
-      right: 2rem;
-      background: rgba(0, 102, 255, 0.2);
-      border: 2px solid #0066ff;
-      border-radius: 50px;
-      padding: 0.8rem 1.5rem;
-      color: #e8e8e8;
-      font-weight: 600;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      z-index: 1000;
-      box-shadow: 0 0 20px rgba(0, 102, 255, 0.4);
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      font-size: 1rem;
-    }
-
-    .lang-toggle:hover {
-      background: rgba(0, 102, 255, 0.35);
-      box-shadow: 0 0 30px rgba(0, 102, 255, 0.6);
-      transform: scale(1.05);
-    }
-
-    .lang-arrow {
-      font-size: 1.2rem;
-      transition: transform 0.3s ease;
-    }
-
     .content-section {
       margin-bottom: 2.5rem;
     }
-
     .section-title {
       color: #0066ff;
       font-size: 1.8rem;
@@ -207,25 +157,22 @@
       padding-bottom: 0.5rem;
       position: relative;
     }
-
     .section-title::after {
       content: '';
       position: absolute;
       bottom: -2px;
-      right: 0;
+      left: 0;
       width: 50px;
       height: 2px;
       background: #0099ff;
       box-shadow: 0 0 10px #0099ff;
     }
-
     .skills-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 1rem;
       margin-bottom: 2rem;
     }
-
     .skill-item {
       background: rgba(0, 102, 255, 0.15);
       padding: 1rem;
@@ -236,26 +183,22 @@
       text-align: center;
       transition: all 0.3s ease;
     }
-
     .skill-item:hover {
       background: rgba(0, 102, 255, 0.25);
       transform: translateY(-2px);
       box-shadow: 0 5px 15px rgba(0, 102, 255, 0.4);
     }
-
     .about-text {
       color: #d0d0d0;
       font-size: 1.1rem;
       line-height: 1.8;
       text-align: justify;
     }
-
     .contact-info {
       display: flex;
       flex-direction: column;
       gap: 1rem;
     }
-
     .email-link {
       color: #e8e8e8;
       font-size: 1.2rem;
@@ -271,7 +214,6 @@
       font-weight: 600;
       justify-content: center;
     }
-
     .email-link:hover {
       background: rgba(0, 102, 255, 0.35);
       color: #fff;
@@ -279,96 +221,74 @@
       transform: translateY(-2px);
     }
 
-    .right-page {
-      background: #000000;
-      padding: 2rem;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      position: relative;
-    }
-
+    /* تكبير صندوق الفيديو */
     .video-container {
       width: 100%;
-      max-width: 600px;
+      max-width: 680px;  /* زيادة من 600px إلى 680px */
       border: 3px solid #0066ff;
-      border-radius: 16px;
+      border-radius: 18px;
       overflow: hidden;
-      box-shadow: 0 0 40px rgba(0, 102, 255, 0.6), inset 0 0 30px rgba(0, 0, 0, 0.5);
+      box-shadow: 0 0 45px rgba(0, 102, 255, 0.7), inset 0 0 35px rgba(0, 0, 0, 0.5);
       position: relative;
       animation: breatheVideo 2s ease-in-out infinite;
     }
-
     @keyframes breatheVideo {
       0%, 100% {
-        box-shadow: 0 0 30px rgba(0, 102, 255, 0.4), inset 0 0 30px rgba(0, 0, 0, 0.5);
+        box-shadow: 0 0 35px rgba(0, 102, 255, 0.5), inset 0 0 35px rgba(0, 0, 0, 0.5);
       }
       50% {
-        box-shadow: 0 0 60px rgba(0, 102, 255, 0.8), inset 0 0 30px rgba(0, 0, 0, 0.5);
+        box-shadow: 0 0 70px rgba(0, 102, 255, 0.9), inset 0 0 35px rgba(0, 0, 0, 0.5);
       }
     }
-
     .youtube-player {
       width: 100%;
-      height: 400px;
+      height: 460px;  /* زيادة من 400px إلى 460px */
       border: none;
       display: block;
     }
   </style>
 </head>
 <body>
-
 <div class="book-container">
-  <!-- زر تبديل اللغة -->
-  <button class="lang-toggle" onclick="toggleLanguage()">
-    <span class="lang-en">EN</span>
-    <span class="lang-arrow">→</span>
-    <span class="lang-ar" style="display:none;">AR</span>
-  </button>
-  
-  <!-- الصفحة اليسرى -->
+
+  <!-- Left Page: Video (شمال - أكبر الآن) -->
   <div class="left-page">
+    <div class="video-container">
+      <iframe class="youtube-player"
+        src="https://www.youtube.com/embed/NVeYj3AoNw8?autoplay=1&loop=1&playlist=NVeYj3AoNw8&mute=0&controls=1&modestbranding=1"
+        frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen>
+      </iframe>
+    </div>
+  </div>
+
+  <!-- Right Page: Content (يمين) -->
+  <div class="right-page">
     <div class="profile-header">
       <img src="photo1.jpg" alt="Rio Profile Photo" class="profile-image" onerror="this.style.display='none'">
       <h1 class="rio-title">Rio</h1>
       <h2 class="rio-subtitle">Front End Developer</h2>
     </div>
-
     <div class="content-section">
-      <h3 class="section-title">
-        <span class="lang-ar" style="display: none;">المهارات</span>
-        <span class="lang-en">Skills</span>
-      </h3>
+      <h3 class="section-title">Skills</h3>
       <div class="skills-grid">
         <div class="skill-item">HTML</div>
         <div class="skill-item">CSS</div>
         <div class="skill-item">JavaScript</div>
+        <div class="skill-item">Git/GitHub</div>
         <div class="skill-item">AI Tools</div>
       </div>
     </div>
-
     <div class="content-section">
-      <h3 class="section-title">
-        <span class="lang-ar" style="display: none;">عنّي</span>
-        <span class="lang-en">About Me</span>
-      </h3>
+      <h3 class="section-title">About Me</h3>
       <p class="about-text">
-        <span class="lang-ar" style="display: none;">
-          مطوّر واجهات أمامية ، متخصص في تحويل الأفكار إلى تجارب ويب استثنائية. 
-          أجمع بين الإبداع البصري والكفاءة التقنية لبناء حلول رقمية تلهم المستخدمين وتدفع الأعمال نحو النجاح.
-        </span>
-        <span class="lang-en">
-          Front End Developer, specialized in transforming ideas into exceptional web experiences. 
-          I combine visual creativity with technical efficiency to build digital solutions that inspire users and drive business success.
-        </span>
+        Front End Developer, specialized in transforming ideas into exceptional web experiences.
+        I combine visual creativity with technical efficiency to build digital solutions that inspire users and drive business success.
       </p>
     </div>
-
     <div class="content-section">
-      <h3 class="section-title">
-        <span class="lang-ar" style="display: none;">التواصل</span>
-        <span class="lang-en">Contact</span>
-      </h3>
+      <h3 class="section-title">Contact</h3>
       <div class="contact-info">
         <a href="mailto:rio19x.frontend@gmail.com" class="email-link">
           <i class="fas fa-envelope"></i> rio19x.frontend@gmail.com
@@ -380,48 +300,11 @@
           <i class="fab fa-github"></i> GitHub
         </a>
         <p class="about-text" style="color: #a0a0a0; font-size: 1rem; text-align: center;">
-          <span class="lang-ar" style="display: none;">متاح للعمل على المشاريع المبتكرة والتعاون</span>
-          <span class="lang-en">Available for innovative projects and collaboration</span>
+          Available for innovative projects and collaboration
         </p>
       </div>
     </div>
   </div>
-
-  <!-- الصفحة اليمنى -->
-  <div class="right-page">  
-    <div class="video-container">
-      <iframe class="youtube-player"
-        src="https://www.youtube.com/embed/NVeYj3AoNw8?autoplay=1&loop=1&playlist=NVeYj3AoNw8&mute=0&controls=1&modestbranding=1"
-        frameborder="0"
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-        allowfullscreen>
-      </iframe>
-    </div>
-  </div>
 </div>
-
-<script>
-function toggleLanguage() {
-  const html = document.documentElement;
-  const langAr = document.querySelectorAll('.lang-ar');
-  const langEn = document.querySelectorAll('.lang-en');
-  const button = document.querySelector('.lang-toggle');
-  
-  if (html.getAttribute('lang') === 'en') {
-    html.setAttribute('lang', 'ar');
-    html.setAttribute('dir', 'rtl');
-    button.innerHTML = '<span>AR</span><span class="lang-arrow">→</span><span>EN</span>';
-    langAr.forEach(el => el.style.display = 'inline');
-    langEn.forEach(el => el.style.display = 'none');
-  } else {
-    html.setAttribute('lang', 'en');
-    html.setAttribute('dir', 'ltr');
-    button.innerHTML = '<span>EN</span><span class="lang-arrow">→</span><span>AR</span>';
-    langAr.forEach(el => el.style.display = 'none');
-    langEn.forEach(el => el.style.display = 'inline');
-  }
-}
-</script>
-
 </body>
 </html>
