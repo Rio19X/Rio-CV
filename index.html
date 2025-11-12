@@ -57,6 +57,12 @@
       animation: breatheBlue 2s ease-in-out infinite;
     }
     
+    .book-container > .lang-toggle {
+      position: absolute;
+      bottom: 2rem;
+      right: 2rem;
+    }
+    
     @keyframes breatheBlue {
       0%, 100% {
         box-shadow: 
@@ -175,8 +181,8 @@
     }
     
     .lang-toggle {
-      position: fixed;
-      top: 2rem;
+      position: absolute;
+      bottom: 2rem;
       right: 2rem;
       background: rgba(0, 102, 255, 0.2);
       border: 2px solid #0066ff;
@@ -188,12 +194,21 @@
       transition: all 0.3s ease;
       z-index: 1000;
       box-shadow: 0 0 20px rgba(0, 102, 255, 0.4);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 1rem;
     }
     
     .lang-toggle:hover {
       background: rgba(0, 102, 255, 0.35);
       box-shadow: 0 0 30px rgba(0, 102, 255, 0.6);
       transform: scale(1.05);
+    }
+    
+    .lang-arrow {
+      font-size: 1.2rem;
+      transition: transform 0.3s ease;
     }
 
     .content-section {
@@ -359,8 +374,10 @@
     
     @media (max-width: 1024px) {
       .lang-toggle {
-        top: 1rem;
+        bottom: 1rem;
         right: 1rem;
+        padding: 0.6rem 1.2rem;
+        font-size: 0.9rem;
       }
     }
 
@@ -446,13 +463,16 @@
 </head>
 <body>
 
-  <!-- زر تبديل اللغة -->
-  <button class="lang-toggle" onclick="toggleLanguage()">
-    <span class="lang-ar" style="display: none;">English</span>
-    <span class="lang-en">العربية</span>
-  </button>
-
   <div class="book-container">
+    <!-- زر تبديل اللغة -->
+    <button class="lang-toggle" onclick="toggleLanguage()">
+      <span class="lang-ar" style="display: none;">EN</span>
+      <span class="lang-en">EN</span>
+      <span class="lang-arrow">→</span>
+      <span class="lang-ar" style="display: none;">AR</span>
+      <span class="lang-en" style="display: none;">AR</span>
+    </button>
+    
     <!-- الصفحة اليسرى -->
     <div class="left-page">
       <div class="profile-header">
@@ -527,19 +547,42 @@
       const html = document.documentElement;
       const langAr = document.querySelectorAll('.lang-ar');
       const langEn = document.querySelectorAll('.lang-en');
+      const button = document.querySelector('.lang-toggle');
       
       if (html.getAttribute('lang') === 'en') {
         // التبديل للعربية
         html.setAttribute('lang', 'ar');
         
-        langAr.forEach(el => el.style.display = 'inline');
-        langEn.forEach(el => el.style.display = 'none');
+        // تحديث محتوى الزر
+        button.innerHTML = '<span>AR</span><span class="lang-arrow">→</span><span>EN</span>';
+        
+        langAr.forEach(el => {
+          if (!el.closest('.lang-toggle')) {
+            el.style.display = 'inline';
+          }
+        });
+        langEn.forEach(el => {
+          if (!el.closest('.lang-toggle')) {
+            el.style.display = 'none';
+          }
+        });
       } else {
         // التبديل للإنجليزية
         html.setAttribute('lang', 'en');
         
-        langAr.forEach(el => el.style.display = 'none');
-        langEn.forEach(el => el.style.display = 'inline');
+        // تحديث محتوى الزر
+        button.innerHTML = '<span>EN</span><span class="lang-arrow">→</span><span>AR</span>';
+        
+        langAr.forEach(el => {
+          if (!el.closest('.lang-toggle')) {
+            el.style.display = 'none';
+          }
+        });
+        langEn.forEach(el => {
+          if (!el.closest('.lang-toggle')) {
+            el.style.display = 'inline';
+          }
+        });
       }
     }
   </script>
